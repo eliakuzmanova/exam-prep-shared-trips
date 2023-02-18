@@ -26,6 +26,6 @@ app.use(authentication)
 app.use(router)
 
 mongoose.set({"strictQuery": false})
-mongoose.connect("mongodb://localhost:27017/") // <---------- add name of database connection
+mongoose.connect("mongodb://localhost:27017/sharedTrips") // <---------- add name of database connection
 
 app.listen(3000, console.log("Server is listeting on port 3000..."))
