@@ -10,10 +10,10 @@ const {isAuth} = require("../middlewares/authMiddleware")
 router.get("/", homeController.getHomeView)
 router.get("/404", homeController.get404View)
 
-// router.get("/catalog", tripController.getCatalogView) <----checkname if catalog 
+router.get("/shared-trips", tripController.getSharedTripsView)
 
-// router.get("/create" , isAuth, tripController.getCreateView) 
-// router.post("/create", isAuth, tripController.postCreate)
+router.get("/create" , isAuth, tripController.getCreateView) 
+router.post("/create", isAuth, tripController.postCreate)
 
 //router.get("/delete/:id", isAuth, tripController.getDelete)
 

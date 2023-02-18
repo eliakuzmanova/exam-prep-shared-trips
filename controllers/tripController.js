@@ -1,38 +1,41 @@
+
+const errorUtils = require("../utils/errorUtils")
+
 const tripService = require("../services/tripService");
 
-// exports.getCatalogView = async (req, res) => {
+exports.getSharedTripsView = async (req, res) => {
 
-//     try{
-//       const trips = await tripService.getAll();
-//       res.render("trip/catalog", {trips})
-//     } catch (err) {
+    try{
+      const trips = await tripService.getAll();
+      res.render("trip//shared-trips", {trips})
+    } catch (err) {
 
-//     return errorUtils.errorResponse(res, "home/404", err, 404);
+    return errorUtils.errorResponse(res, "home/404", err, 404);
 
-//    };
-// }
+   };
+}
 
-// exports.getCreateView = (req, res) => {
-//     try {
-//         res.render("trip/create")
-//     } catch (err) {
-//         return errorUtils.errorResponse(res, "home/404", err, 404);
+exports.getCreateView = (req, res) => {
+    try {
+        res.render("trip/create")
+    } catch (err) {
+        return errorUtils.errorResponse(res, "home/404", err, 404);
 
-//     }
-// };
+    }
+};
 
-// exports.postCreate = async (req, res) => {
-//     try {
-//         const data = req.body;
-//         const userId = req.user.userId; //<----- check userId
+exports.postCreate = async (req, res) => {
+    try {
+        const data = req.body;
+        const userId = req.user.userId; //<----- check userId
 
-//         await tripService.create(data, userId)
+        await tripService.create(data, userId)
 
-//         res.redirect("/catalog") // <---- check redirect
-//     } catch (err) {
-//         return errorUtils.errorResponse(res, "trip/create", err, 404);
-//     }
-// };
+        res.redirect("/shared-trips") // <---- check redirect
+    } catch (err) {
+        return errorUtils.errorResponse(res, "trip/create", err, 404);
+    }
+};
 
 // exports.getEditView = async (req, res) => {
 //     try {
