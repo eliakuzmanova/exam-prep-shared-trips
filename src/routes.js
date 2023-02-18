@@ -22,9 +22,11 @@ router.post("/edit/:id", isAuth, tripController.postEdit)
 
 router.get("/details/:id", tripController.getDetailsView)
 
-// router.get("/something!!!/:id", isAuth, tripController.!!!) <----checkname 
+router.get("/join/:id", isAuth, tripController.getJoin)
 router.get("/register", authController.getRegisterView);
 router.post("/register", authController.postRegister);
+
+router.get("/profile", isAuth, tripController.getProfileView)
 
 router.get("/login", authController.getLoginView);
 router.post("/login", authController.postLogin);
