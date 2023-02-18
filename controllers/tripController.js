@@ -37,29 +37,29 @@ exports.postCreate = async (req, res) => {
     }
 };
 
-// exports.getEditView = async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         const trip = await tripService.getById(id);
+exports.getEditView = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const trip = await tripService.getById(id);
         
-//         res.render("trip/edit", {trip})
-//     } catch (err) {
-//         return errorUtils.errorResponse(res, "home/404", err, 404);
-//     }
-// };
+        res.render("trip/edit", {trip})
+    } catch (err) {
+        return errorUtils.errorResponse(res, "home/404", err, 404);
+    }
+};
 
-// exports.postEdit = async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         const data = req.body;
+exports.postEdit = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
 
-//         await tripService.update(data, id);
+        await tripService.update(data, id);
 
-//         res.redirect(`/details/${id}`) // <---- check redirect
-//     } catch (err) {
-//         return errorUtils.errorResponse(res, "trip/edit", err, 404);  
-//     }
-// };
+        res.redirect(`/details/${id}`) // <---- check redirect
+    } catch (err) {
+        return errorUtils.errorResponse(res, "trip/edit", err, 404);  
+    }
+};
 
 exports.getDelete = async (req, res) => {
     try {

@@ -17,8 +17,8 @@ router.post("/create", isAuth, tripController.postCreate)
 
 router.get("/delete/:id", isAuth, tripController.getDelete)
 
-// router.get("/edit/:id", isAuth, tripController.getEditView)
-// router.post("/edit/:id", isAuth, tripController.postEdit)
+router.get("/edit/:id", isAuth, tripController.getEditView)
+router.post("/edit/:id", isAuth, tripController.postEdit)
 
 router.get("/details/:id", tripController.getDetailsView)
 
