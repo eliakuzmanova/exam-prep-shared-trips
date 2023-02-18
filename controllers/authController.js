@@ -50,7 +50,7 @@ exports.getLoginView = (req, res) => {
 
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body
-    //TODO ERORR HANDLIN
+
     try {
         const token = await authService.login(req, res, email, password)
         res.cookie("auth", token)

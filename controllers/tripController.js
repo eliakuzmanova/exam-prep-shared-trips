@@ -7,7 +7,7 @@ exports.getSharedTripsView = async (req, res) => {
 
     try{
       const trips = await tripService.getAll();
-      res.render("trip//shared-trips", {trips})
+      res.render("trip/shared-trips", {trips})
     } catch (err) {
 
     return errorUtils.errorResponse(res, "home/404", err, 404);
@@ -61,34 +61,45 @@ exports.postCreate = async (req, res) => {
 //     }
 // };
 
-// exports.getDelete = async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         await tripService.delete(id);
-//     } catch (err) {
-//         return errorUtils.errorResponse(res, "home/404", err, 404);
-//     }
-// };
+exports.getDelete = async (req, res) => {
+    try {
+        const id = req.params.id;
+        await tripService.delete(id);
+        res.redirect("/shared-trips")
+    } catch (err) {
+        return errorUtils.errorResponse(res, "home/404", err, 404);
+    }
+};
 
-// exports.getDetailsView = async (req, res) => {
-//     try {
+exports.getDetailsView = async (req, res) => {
+    try {
         
-//         const id = req.params.id
-   
-//         const trip = await bookService.getById(id);
+        const id = req.params.id
+        	console.log("id: " + id); //<-- delete
+        const trip = await tripService.getByIdAndPop(id);
+        console.log("trip: " + trip); //<-- delete
+        const isAuth = req.user?.userId
+        console.log("isAuth: " + isAuth); //<-- delete
+        const isCreator = trip.creator._id == req.user?.userId
+        console.log("isCreator: " + isCreator); //<-- delete
+        const isBuddie = trip.buddies.some(x => x._id == req.user?.userId) 
+        console.log("isBuddie: " + isBuddie); //<-- delete
+        const buddiesCollection = trip.buddies.map(b => b.email)
+        console.log("buddiesCollection:");  //<-- delete
+        buddiesCollection.forEach(b => console.log(b)) //<-- delete
+        const buddies = buddiesCollection.join(",")
+        console.log("buddies: " + buddies); //<-- delete
+        let seats = trip.seats
+        if(seats == 0) {
+            seats = undefined
+        }
+        console.log("seats: " + seats); //<-- delete
+        res.render("trip/details", {trip, isAuth, isCreator, isBuddie, buddies, seats}) 
 
-//         const isAuth = req.user?.userId
-       
-//         const isOwner = book.owner == req.user?.userId
-//         const isBuyer = book.wishList.some(x => x._id == req.user?.userId) //<---- change name and wishlist
-        
-
-//         res.render("trip/details", {trip, isAuth, isOwner, isBuyer}) // <--- change buyer
-
-//     } catch (err) {
-//         return errorUtils.errorResponse(res, "home/404", err, 404);
-//     }
-// } 
+    } catch (err) {
+        return errorUtils.errorResponse(res, "home/404", err, 404);
+    }
+} 
 
 
 // exports.!!!! = async (req, res) => {

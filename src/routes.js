@@ -15,12 +15,12 @@ router.get("/shared-trips", tripController.getSharedTripsView)
 router.get("/create" , isAuth, tripController.getCreateView) 
 router.post("/create", isAuth, tripController.postCreate)
 
-//router.get("/delete/:id", isAuth, tripController.getDelete)
+router.get("/delete/:id", isAuth, tripController.getDelete)
 
 // router.get("/edit/:id", isAuth, tripController.getEditView)
 // router.post("/edit/:id", isAuth, tripController.postEdit)
 
-// router.get("/details/:id", tripController.getDetailsView)
+router.get("/details/:id", tripController.getDetailsView)
 
 // router.get("/something!!!/:id", isAuth, tripController.!!!) <----checkname 
 router.get("/register", authController.getRegisterView);
